@@ -1,131 +1,69 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import './RowPost.css'
-function RowPost() {
+import YouTube from 'react-youtube'
+import {API_KEY,imgUrl } from "../constants/constant";
+import axios from '../axios'
+function RowPost(props) {
+  const [latest, setLatest] = useState([])
+  const [Id,setId]=useState('')
+  useEffect(() => {
+    axios.get(props.url).then((res)=>{
+      setLatest(res.data.results)
+      console.log(res.data.results);
+      
+     
+    })
+  }, []);  
+    const opts = {
+    height: '390',
+    width: '100%',
+   playerVars:{
+    autoplay: 1,
+   },
+     
+    };
+    console.log("video id",Id)
+
+
+  const movieHandle=(id)=>{
+     
+      
+      axios.get(`/movie/${id}/videos?api_key=${API_KEY}&language=en-US`).then((res)=>{
+        console.log(res.data.results);
+        if(res.data.results.length!==0){
+          setId(res.data.results[29])
+          console.log(res.data.results[29]);
+        }else{
+          alert("Video is not available")
+        }
+
+      })
+  }
   return (
     <div className="row">
-      <h2>title</h2>
+      <h2>{props.title}</h2>
       <div className="posters">
-        <img className="poster"
-          src="https://images.squarespace-cdn.com/content/v1
-/59232e19579fb3fa44a693c2/1589212826160-UM9PEPGOS3OJPR0FJ81X/ke
-17ZwdGBToddI8pDm48kHZUaJeKzodyg_sXWBMxNTdZw-zPPgdn4jUwVcJE1ZvWQ
-UxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxCBUU7B-_SAG1kGvCwYgmU
-jQXvn8_OJjtz3K1llMQBa1MPsuSXPSY3X-tgg78M7lI/SKOyqL1qFLIhbK6ho2lB
--696x975.jpg?format=1500w"
-          alt="poster"
-          srcset=""
-        />
-         <img className="poster"
-          src="https://images.squarespace-cdn.com/content/v1
-/59232e19579fb3fa44a693c2/1589212826160-UM9PEPGOS3OJPR0FJ81X/ke
-17ZwdGBToddI8pDm48kHZUaJeKzodyg_sXWBMxNTdZw-zPPgdn4jUwVcJE1ZvWQ
-UxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxCBUU7B-_SAG1kGvCwYgmU
-jQXvn8_OJjtz3K1llMQBa1MPsuSXPSY3X-tgg78M7lI/SKOyqL1qFLIhbK6ho2lB
--696x975.jpg?format=1500w"
-          alt="poster"
-          srcset=""
-        />
-         <img className="poster"
-          src="https://images.squarespace-cdn.com/content/v1
-/59232e19579fb3fa44a693c2/1589212826160-UM9PEPGOS3OJPR0FJ81X/ke
-17ZwdGBToddI8pDm48kHZUaJeKzodyg_sXWBMxNTdZw-zPPgdn4jUwVcJE1ZvWQ
-UxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxCBUU7B-_SAG1kGvCwYgmU
-jQXvn8_OJjtz3K1llMQBa1MPsuSXPSY3X-tgg78M7lI/SKOyqL1qFLIhbK6ho2lB
--696x975.jpg?format=1500w"
-          alt="poster"
-          srcset=""
-        />
-           <img className="poster"
-          src="https://images.squarespace-cdn.com/content/v1
-/59232e19579fb3fa44a693c2/1589212826160-UM9PEPGOS3OJPR0FJ81X/ke
-17ZwdGBToddI8pDm48kHZUaJeKzodyg_sXWBMxNTdZw-zPPgdn4jUwVcJE1ZvWQ
-UxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxCBUU7B-_SAG1kGvCwYgmU
-jQXvn8_OJjtz3K1llMQBa1MPsuSXPSY3X-tgg78M7lI/SKOyqL1qFLIhbK6ho2lB
--696x975.jpg?format=1500w"
-          alt="poster"
-          srcset=""
-        />
-         <img className="poster"
-          src="https://images.squarespace-cdn.com/content/v1
-/59232e19579fb3fa44a693c2/1589212826160-UM9PEPGOS3OJPR0FJ81X/ke
-17ZwdGBToddI8pDm48kHZUaJeKzodyg_sXWBMxNTdZw-zPPgdn4jUwVcJE1ZvWQ
-UxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxCBUU7B-_SAG1kGvCwYgmU
-jQXvn8_OJjtz3K1llMQBa1MPsuSXPSY3X-tgg78M7lI/SKOyqL1qFLIhbK6ho2lB
--696x975.jpg?format=1500w"
-          alt="poster"
-          srcset=""
-        />
-         <img className="poster"
-          src="https://images.squarespace-cdn.com/content/v1
-/59232e19579fb3fa44a693c2/1589212826160-UM9PEPGOS3OJPR0FJ81X/ke
-17ZwdGBToddI8pDm48kHZUaJeKzodyg_sXWBMxNTdZw-zPPgdn4jUwVcJE1ZvWQ
-UxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxCBUU7B-_SAG1kGvCwYgmU
-jQXvn8_OJjtz3K1llMQBa1MPsuSXPSY3X-tgg78M7lI/SKOyqL1qFLIhbK6ho2lB
--696x975.jpg?format=1500w"
-          alt="poster"
-          srcset=""
-        />
-           <img className="poster"
-          src="https://images.squarespace-cdn.com/content/v1
-/59232e19579fb3fa44a693c2/1589212826160-UM9PEPGOS3OJPR0FJ81X/ke
-17ZwdGBToddI8pDm48kHZUaJeKzodyg_sXWBMxNTdZw-zPPgdn4jUwVcJE1ZvWQ
-UxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxCBUU7B-_SAG1kGvCwYgmU
-jQXvn8_OJjtz3K1llMQBa1MPsuSXPSY3X-tgg78M7lI/SKOyqL1qFLIhbK6ho2lB
--696x975.jpg?format=1500w"
-          alt="poster"
-          srcset=""
-        />
-         <img className="poster"
-          src="https://images.squarespace-cdn.com/content/v1
-/59232e19579fb3fa44a693c2/1589212826160-UM9PEPGOS3OJPR0FJ81X/ke
-17ZwdGBToddI8pDm48kHZUaJeKzodyg_sXWBMxNTdZw-zPPgdn4jUwVcJE1ZvWQ
-UxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxCBUU7B-_SAG1kGvCwYgmU
-jQXvn8_OJjtz3K1llMQBa1MPsuSXPSY3X-tgg78M7lI/SKOyqL1qFLIhbK6ho2lB
--696x975.jpg?format=1500w"
-          alt="poster"
-          srcset=""
-        />
-         <img className="poster"
-          src="https://images.squarespace-cdn.com/content/v1
-/59232e19579fb3fa44a693c2/1589212826160-UM9PEPGOS3OJPR0FJ81X/ke
-17ZwdGBToddI8pDm48kHZUaJeKzodyg_sXWBMxNTdZw-zPPgdn4jUwVcJE1ZvWQ
-UxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxCBUU7B-_SAG1kGvCwYgmU
-jQXvn8_OJjtz3K1llMQBa1MPsuSXPSY3X-tgg78M7lI/SKOyqL1qFLIhbK6ho2lB
--696x975.jpg?format=1500w"
-          alt="poster"
-          srcset=""
-        />
-           <img className="poster"
-          src="https://images.squarespace-cdn.com/content/v1
-/59232e19579fb3fa44a693c2/1589212826160-UM9PEPGOS3OJPR0FJ81X/ke
-17ZwdGBToddI8pDm48kHZUaJeKzodyg_sXWBMxNTdZw-zPPgdn4jUwVcJE1ZvWQ
-UxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxCBUU7B-_SAG1kGvCwYgmU
-jQXvn8_OJjtz3K1llMQBa1MPsuSXPSY3X-tgg78M7lI/SKOyqL1qFLIhbK6ho2lB
--696x975.jpg?format=1500w"
-          alt="poster"
-          srcset=""
-        />
-         <img className="poster"
-          src="https://images.squarespace-cdn.com/content/v1
-/59232e19579fb3fa44a693c2/1589212826160-UM9PEPGOS3OJPR0FJ81X/ke
-17ZwdGBToddI8pDm48kHZUaJeKzodyg_sXWBMxNTdZw-zPPgdn4jUwVcJE1ZvWQ
-UxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxCBUU7B-_SAG1kGvCwYgmU
-jQXvn8_OJjtz3K1llMQBa1MPsuSXPSY3X-tgg78M7lI/SKOyqL1qFLIhbK6ho2lB
--696x975.jpg?format=1500w"
-          alt="poster"
-          srcset=""
-        />
-         <img className="poster"
-          src="https://images.squarespace-cdn.com/content/v1
-/59232e19579fb3fa44a693c2/1589212826160-UM9PEPGOS3OJPR0FJ81X/ke
-17ZwdGBToddI8pDm48kHZUaJeKzodyg_sXWBMxNTdZw-zPPgdn4jUwVcJE1ZvWQ
-UxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpxCBUU7B-_SAG1kGvCwYgmU
-jQXvn8_OJjtz3K1llMQBa1MPsuSXPSY3X-tgg78M7lI/SKOyqL1qFLIhbK6ho2lB
--696x975.jpg?format=1500w"
-          alt="poster"
-          srcset=""
-        />
+        {
+          latest.map((obj)=>{
+           
+              return(
+                <img onClick={()=>movieHandle(obj.id)} className={props.isSmall ? 'smallPoster':'poster'}
+                src={imgUrl+obj.poster_path}
+                alt="poster"
+                srcset=""
+              />
+              )
+          })
+        }
+       
       </div>
+    {
+    
+
+    
+    Id &&   <YouTube opts={opts} videoId={Id.key}/>
+    }
+
     </div>
   );
 }
